@@ -23,8 +23,8 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
       # Running a script file
-      # Creating a variable and passing it to the script
+      # Creating a variable and NOT passing it to the script (a.k.a global)
       - name: Run hello.sh file
         run: |
-          GREETING_NAME="World"
-          ./hello.sh $GREETING_NAME
+          GREETING_NAME="Worldz"
+          ./hello.sh
