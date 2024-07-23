@@ -31,6 +31,7 @@ jobs:
 
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
+      # (Getting previous step output by way if its ID)
       - name: Run hello.sh file
         run: ./hello.sh
         # Using GitHub Actions Expressions
@@ -39,3 +40,9 @@ jobs:
           SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
           GREETING_NAME: "World"
           LIST_FILES: ${{steps.listFiles.outputs.LIST_FILES}}
+
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.13.x
+          cache: npm, node
