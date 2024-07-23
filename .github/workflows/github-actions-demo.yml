@@ -17,15 +17,18 @@ jobs:
 
       - name: List files in the repository
         # github.workspace is the repo content, i.e. not the .github/workspaces content
+        # Setting a variable holding the sh file's name
         run: |
-          ls ${{ github.workspace }}
+          LOCAL_FILES=$(ls ${{ github.workspace }})
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
       # Running a script file
       # Creating a variable and passing it to the script via the env keyword
+      # Fetching LOCAL_FILES set before and passing it as well
       - name: Run hello.sh file
         run: |
           ./hello.sh
         env:
           GREETING_NAME: "Worldze"
+          LOCAL_FILES: $LOCAL_FILES
