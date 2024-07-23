@@ -16,11 +16,13 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
 
       - name: List files in the repository
+        id: listFiles
         # github.workspace is the repo content, i.e. not the .github/workspaces content
         # Setting a variable holding the sh file's name
         run: |
           LOCAL_FILES=$(ls ${{ github.workspace }})
           echo $LOCAL_FILES
+          echo "LIST_FILES=${LOCAL_FILES}" >> $GITHUB_OUTPUT
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
@@ -28,9 +30,10 @@ jobs:
       # Creating a variable and passing it to the script via the env keyword
       - name: Run hello.sh file
         run: |
+          echo "List files: ${{steps.listFiles.outputs.LIST_FILES}}"
           ./hello.sh
         # Using GitHub Actions Expressions
         # https://docs.github.com/en/actions/learn-github-actions/expressions
         env:
           SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
-          GREETING_NAME: "Worldze"
+          GREETING_NAME: "World"
