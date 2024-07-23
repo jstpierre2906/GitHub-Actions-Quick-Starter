@@ -22,6 +22,8 @@ jobs:
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
+      # Running a script file
+      # Creating a variable and passing it to the script
       - name: Run hello.sh file
         run: |
           GREETING_NAME="World"
