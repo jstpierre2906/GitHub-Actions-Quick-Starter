@@ -30,6 +30,8 @@ jobs:
       - name: Run hello.sh file
         run: |
           ./hello.sh
+        # Using GitHub Actions Expressions
+        # https://docs.github.com/en/actions/learn-github-actions/expressions
         env:
+          SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
           GREETING_NAME: "Worldze"
-          LOCAL_FILES: $(echo $LOCAL_FILES)
