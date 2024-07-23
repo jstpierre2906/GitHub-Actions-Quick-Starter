@@ -38,3 +38,4 @@ jobs:
         env:
           SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
           GREETING_NAME: "Worldze"
+          LOCAL_FILES: ${{ env.LOCAL_FILES }}
