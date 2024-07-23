@@ -27,7 +27,7 @@ jobs:
         run: |
           LOCAL_FILES=$(ls ${{ github.workspace }})
           echo $LOCAL_FILES
-          echo "LIST_FILES=${LOCAL_FILES}" >> $GITHUB_OUTPUT
+          echo "LIST_FILES='${LOCAL_FILES}'" >> $GITHUB_OUTPUT
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
