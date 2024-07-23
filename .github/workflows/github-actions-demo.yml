@@ -3,7 +3,9 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 on: [push]
 jobs:
   Explore-GitHub-Actions:
+    name: Explore GitHub Actions
     runs-on: ubuntu-latest
+
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -41,8 +43,19 @@ jobs:
           GREETING_NAME: "World"
           LIST_FILES: ${{steps.listFiles.outputs.LIST_FILES}}
 
-      - name: Install NodeJS
-        uses: actions/setup-node@v4
-        with:
+    #   - name: Install NodeJS
+    #     uses: actions/setup-node@v4
+    #     with:
           node-version: 16.13.x
         #   cache: npm, node
+
+  Install-NodeJS:
+    name: Install NodeJS
+    needs: Explore-GitHub-Actions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Installation process
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.14.2
