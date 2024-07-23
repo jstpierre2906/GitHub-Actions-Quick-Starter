@@ -27,7 +27,7 @@ jobs:
         run: |
           LOCAL_FILES=$(ls ${{ github.workspace }})
           echo $LOCAL_FILES
-          echo "LIST_FILES=$(echo ${LOCAL_FILES} | sed 's/ /,/g')" >> $GITHUB_OUTPUT
+          echo "LIST_FILES=$(echo "${LOCAL_FILES} | sed 's/ /, /g'")" >> $GITHUB_OUTPUT
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
