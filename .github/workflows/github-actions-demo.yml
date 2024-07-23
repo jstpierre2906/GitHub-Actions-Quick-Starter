@@ -23,4 +23,6 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
       - name: Run hello.sh file
-        run: ./hello.sh
+        run: |
+          GREETING_NAME="World"
+          ./hello.sh $GREETING_NAME

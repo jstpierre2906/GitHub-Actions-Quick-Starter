@@ -1,1 +1,1 @@
-echo "Hello World, GitHub Actions Quick Starter"
+echo "Hello $1, GitHub Actions Quick Starter"
