@@ -43,9 +43,9 @@ jobs:
           GREETING_NAME: "World"
           LIST_FILES: ${{steps.listFiles.outputs.LIST_FILES}}
 
-    #   - name: Install NodeJS
-    #     uses: actions/setup-node@v4
-    #     with:
+          #   - name: Install NodeJS
+          #     uses: actions/setup-node@v4
+          #     with:
           node-version: 16.13.x
         #   cache: npm, node
 
@@ -59,3 +59,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18.14.2
+
+  Run-JS-Script:
+    name: Run JS Script
+    needs: Install-NodeJS
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display console.log
+        run: node ./helloJS.js
