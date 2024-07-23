@@ -21,9 +21,10 @@ jobs:
         run: |
           LOCAL_FILES=$(ls ${{ github.workspace }})
           echo $LOCAL_FILES
-        env:
-          # Setting var for use later on in hello.sh
-          LOCAL_FILES: $LOCAL_FILES
+          echo "LOCAL_FILES=test123.sh" >> "$GITHUB_OUTPUT"
+        # env:
+        #   # Setting var for use later on in hello.sh
+        #   LOCAL_FILES: ${{ $LOCAL_FILES }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
