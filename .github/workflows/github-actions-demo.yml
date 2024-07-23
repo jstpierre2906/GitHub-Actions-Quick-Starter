@@ -20,6 +20,7 @@ jobs:
         # Setting a variable holding the sh file's name
         run: |
           LOCAL_FILES=$(ls ${{ github.workspace }})
+          echo $LOCAL_FILES
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
@@ -31,4 +32,4 @@ jobs:
           ./hello.sh
         env:
           GREETING_NAME: "Worldze"
-          LOCAL_FILES: $LOCAL_FILES
+          LOCAL_FILES: $(echo $LOCAL_FILES)
