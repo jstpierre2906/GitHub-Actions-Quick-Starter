@@ -34,7 +34,7 @@ jobs:
       # Fetching LOCAL_FILES set before and passing it as well
       - name: Run hello.sh file
         run: |
-          echo "Mock local file: $LF"
+          echo "Mock local file: ${{env.LOCAL_FILES}}"
           ./hello.sh
         # Using GitHub Actions Expressions
         # https://docs.github.com/en/actions/learn-github-actions/expressions
