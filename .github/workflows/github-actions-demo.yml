@@ -55,7 +55,7 @@ jobs:
 
   Run-JS-Script:
     name: Run JS Script
-    needs: [Explore-GitHub-Actions, Install-NodeJS]
+    needs: [Install-NodeJS]
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
