@@ -66,3 +66,5 @@ jobs:
       # File path is relative to repo root
       - name: Display console.log
         run: node ./helloJS.js
+        env:
+          GREETING_JS: Hello

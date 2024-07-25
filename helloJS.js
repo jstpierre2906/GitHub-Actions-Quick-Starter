@@ -1,1 +1,1 @@
-console.log("Hello from JS");
+console.log(`${process.env.GREETING_JS} from JS`);
