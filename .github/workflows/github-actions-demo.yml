@@ -19,7 +19,7 @@ jobs:
       - name: List files in the repository
         # Setting step ID for use in getting var value further on
         id: listFiles
-        # github.workspace is the repo content, i.e. not the .github/workspaces content
+        # github.workspace is the repo content starting at root level, i.e. not the .github/workspaces content
         # a) Setting a variable holding the sh file's name
         # b) Echoing it
         # c) Sending it to step output (by way of the last echo being added to $GITHUB_OUTPUT, I think).
@@ -34,6 +34,7 @@ jobs:
       # Creating variables and passing them to the script via the env keyword
       # (Getting previous step output by way if its ID)
       - name: Run hello.sh file
+        # File path is relative to repo root
         run: ./hello.sh
         # Using GitHub Actions Expressions
         # https://docs.github.com/en/actions/learn-github-actions/expressions
@@ -54,11 +55,14 @@ jobs:
 
   Run-JS-Script:
     name: Run JS Script
-    needs: [Explore-GitHub-Actions, Install-NodeJS]
+    # Trying to put this job and the previous in parralel
+    needs: [Explore-GitHub-Actions]
+    # needs: [Explore-GitHub-Actions, Install-NodeJS]
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      # File path is relative to repo root
       - name: Display console.log
         run: node ./helloJS.js
