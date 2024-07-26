@@ -7,6 +7,8 @@ jobs:
     if: ${{ startsWith(github.actor, 'jstpierre') }}
     name: Explore GitHub Actions
     runs-on: ubuntu-latest
+    # Using 'dev' environment defined in GitHub (/settings/environments)
+    environment: dev
     steps:
       - name: Printing GitHub vars
         run: |
@@ -37,6 +39,9 @@ jobs:
       - name: Printing job status
         run: echo "🍏 This job's status is ${{ job.status }}."
 
+    #   - name: Accessing variable defined in GitHub
+    #     run: echo "Var from GiHub- ${{ env.ENVIRONMENT_DEV_TEST_VAR }}"
+
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
       # (Getting previous step output by way if its ID)
@@ -48,7 +53,7 @@ jobs:
         env:
           SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
           GREETING_NAME: "World"
-          LIST_FILES: ${{steps.listFiles.outputs.LIST_FILES}}
+          LIST_FILES: ${{ steps.listFiles.outputs.LIST_FILES }}
 
   Install-NodeJS:
     name: Install NodeJS
@@ -65,6 +70,7 @@ jobs:
     needs: [Install-NodeJS]
     runs-on: ubuntu-latest
     # Using matrix strategy to send different values to JS file
+    # (This results in both them steps below being run 2 times)
     strategy:
       matrix:
         GREETING: ["Hello", "Welcome"]
