@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     # Using 'dev' environment defined in GitHub (/settings/environments)
     # must be specified in order to access environment variables set through the GitHub interface
-    environment: dev
+    # environment: dev
     steps:
       - name: Printing GitHub vars
         run: |
