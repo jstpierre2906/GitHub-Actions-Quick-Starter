@@ -1,6 +1,10 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   Explore-GitHub-Actions:
     # Conditional using Expressions
@@ -64,7 +68,7 @@ jobs:
           echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
 
       - name: Accessing secrets
-        # No issue accessing repo var without environment being defined, though.
+        # Secret is being outputted as '***', which is neat.
         run: |
           echo "Repository-level secret from GiHub- ${{ secrets.REPOSITORY_SECRET }}"
 
