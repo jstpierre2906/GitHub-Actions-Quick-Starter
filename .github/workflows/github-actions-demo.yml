@@ -40,7 +40,7 @@ jobs:
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
       # (Getting previous step output by way if its ID)
-      - name: Run hello.sh file
+      - name: Running hello.sh Bash file
         # File path is relative to repo root
         run: ./hello.sh
         # Using GitHub Actions Expressions
@@ -64,6 +64,10 @@ jobs:
     name: Run JS Script
     needs: [Install-NodeJS]
     runs-on: ubuntu-latest
+    # Using matrix strategy to send different values to JS file
+    strategy:
+      matrix:
+        GREETING: ["Hello", "Welcome"]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -72,4 +76,4 @@ jobs:
       - name: Display console.log
         run: node ./helloJS.js
         env:
-          GREETING_JS: Hello
+          GREETING_JS: ${{ matrix.GREETING }}
