@@ -57,6 +57,13 @@ jobs:
           GREETING_NAME: "World"
           LIST_FILES: ${{ steps.listFiles.outputs.LIST_FILES }}
 
+  Display-Env-Variables:
+    name: Display environment variables
+    runs-on: ubuntu-latest
+    steps:
+      - name: Display vars
+        run: env
+
   Install-NodeJS:
     name: Install NodeJS
     needs: Explore-GitHub-Actions
