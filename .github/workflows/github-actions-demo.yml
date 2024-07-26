@@ -1,6 +1,10 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# Using filters to target specific branches
+# Docs: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#using-filters-to-target-specific-branches-or-tags-for-push-events
 on:
+  # workflow_dispatch- to trigger the workflow manually from within GitHub Actions
+  workflow_dispatch:
   push:
     branches:
       - main
