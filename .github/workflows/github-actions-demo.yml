@@ -8,6 +8,7 @@ jobs:
     name: Explore GitHub Actions
     runs-on: ubuntu-latest
     # Using 'dev' environment defined in GitHub (/settings/environments)
+    # must be specified in order to access environment variables set through the GitHub interface
     environment: dev
     steps:
       - name: Printing GitHub vars
@@ -27,7 +28,7 @@ jobs:
       - name: List files in the repository
         # Setting step ID for use in getting var value further on
         id: listFiles
-        # github.workspace is the repo content starting at root level, i.e. not the .github/workspaces content
+        # github.workspace is the repo content starting at root level, i.e. not the .github/workflows content
         # a) Setting a variable holding the sh file's name
         # b) Echoing it
         # c) Sending it to step output (by way of the last echo being added to $GITHUB_OUTPUT, I think).
@@ -40,9 +41,11 @@ jobs:
         run: echo "🍏 This job's status is ${{ job.status }}."
 
       - name: Accessing variable defined in GitHub
-        # Trying to access GitHub var without specifying environment above (commented out)...
+        # Trying to access GitHub environment-level without specifying environment above (commented out)...
         # and no, var is undefined - rollbacking.
-        run: echo "Var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
+        run: |
+          echo "Environment-level var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
+          echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
 
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
@@ -90,5 +93,6 @@ jobs:
       # File path is relative to repo root
       - name: Display console.log
         run: node ./helloJS.js
+        # var is passed as a JS process.env var, i.e. process.env.GREETING_JS
         env:
           GREETING_JS: ${{ matrix.GREETING }}
