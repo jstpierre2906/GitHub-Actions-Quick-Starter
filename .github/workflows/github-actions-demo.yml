@@ -7,9 +7,6 @@ jobs:
     if: ${{ startsWith(github.actor, 'jstpierre') }}
     name: Explore GitHub Actions
     runs-on: ubuntu-latest
-    # Using 'dev' environment defined in GitHub (/settings/environments)
-    # must be specified in order to access environment variables set through the GitHub interface
-    # environment: dev
     steps:
       - name: Printing GitHub vars
         run: |
@@ -40,13 +37,6 @@ jobs:
       - name: Printing job status
         run: echo "🍏 This job's status is ${{ job.status }}."
 
-      - name: Accessing variable defined in GitHub
-        # Trying to access GitHub environment-level without specifying environment above (commented out)...
-        # and no, var is undefined - rollbacking.
-        run: |
-          echo "Environment-level var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
-          echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
-
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
       # (Getting previous step output by way if its ID)
@@ -59,6 +49,24 @@ jobs:
           SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
           GREETING_NAME: "World"
           LIST_FILES: ${{ steps.listFiles.outputs.LIST_FILES }}
+
+  Accessing-Vars-and-Secrets-Set-In-GitHub:
+    name: Accessing variables and secrets defined in GitHub
+    runs-on: ubuntu-latest
+    # Using 'dev' environment defined in GitHub (/settings/environments)
+    # must be specified in order to access environment variables set through the GitHub interface
+    environment: dev
+    steps:
+      - name: Accessing vars
+        # No issue accessing repo var without environment being defined, though.
+        run: |
+          echo "Environment-level var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
+          echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
+
+      - name: Accessing secrets
+        # No issue accessing repo var without environment being defined, though.
+        run: |
+          echo "Repository-level secret from GiHub- ${{ secrets.REPOSITORY_SECRET }}"
 
   Display-Env-Variables:
     name: Display environment variables
