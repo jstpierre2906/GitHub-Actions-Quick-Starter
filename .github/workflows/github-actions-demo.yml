@@ -7,8 +7,8 @@ jobs:
     if: ${{ startsWith(github.actor, 'jstpierre') }}
     name: Explore GitHub Actions
     runs-on: ubuntu-latest
-    # Using 'dev' environment defined in GitHub (/settings/environments)
-    environment: dev
+    # # Using 'dev' environment defined in GitHub (/settings/environments)
+    # environment: dev
     steps:
       - name: Printing GitHub vars
         run: |
@@ -40,6 +40,7 @@ jobs:
         run: echo "🍏 This job's status is ${{ job.status }}."
 
       - name: Accessing variable defined in GitHub
+        # Trying to access GitHub var without specifying environment above (commented out)
         run: echo "Var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
 
       # Running a script file
