@@ -39,8 +39,8 @@ jobs:
       - name: Printing job status
         run: echo "🍏 This job's status is ${{ job.status }}."
 
-    #   - name: Accessing variable defined in GitHub
-    #     run: echo "Var from GiHub- ${{ env.ENVIRONMENT_DEV_TEST_VAR }}"
+      - name: Accessing variable defined in GitHub
+        run: echo "Var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
 
       # Running a script file
       # Creating variables and passing them to the script via the env keyword
