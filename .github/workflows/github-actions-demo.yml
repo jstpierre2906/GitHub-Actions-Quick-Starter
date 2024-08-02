@@ -124,4 +124,9 @@ jobs:
           echo "Foo is '${{ env.foo }}'"
           echo "Attempting to modify var"
           echo "foo=baz" >> $GITHUB_ENV
-          echo "Foo is now '${{ env.foo }}'"
+          echo "Foo is still '${{ env.foo }}'"
+
+      - name: Display env var again
+        id: displayEnvVarAgain
+        run: |
+          echo "Foo should now be baz; is actually '${{ env.foo }}'"
