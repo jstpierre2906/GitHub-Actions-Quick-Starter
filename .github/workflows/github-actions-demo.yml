@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
 # Using filters to target specific branches
 # Docs: https://docs.github.com/en/actions/using-workflows/triggering-a-workflow#using-filters-to-target-specific-branches-or-tags-for-push-events
 on:
-  # workflow_dispatch- to trigger the workflow manually from within GitHub Actions
+  # workflow_dispatch- to enable trigger of the workflow manually from within GitHub Actions
   workflow_dispatch:
   push:
     branches:
@@ -112,3 +112,16 @@ jobs:
         # var is passed as a JS process.env var, i.e. process.env.GREETING_JS
         env:
           GREETING_JS: ${{ matrix.GREETING }}
+
+  Share-and-Update-Var-Between-Steps:
+    runs-on: ubuntu-latest
+    env:
+      foo: bar
+    steps:
+      - name: Display env var
+        id: displayEnvVar
+        run: |
+          echo "Foo is '${{ env.foo }}'"
+          echo "Attempting to modify var"
+          echo "foo=baz" >> $GITHUB_ENV
+          echo "Foo is now '${{ env.foo }}'"
