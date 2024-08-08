@@ -119,7 +119,7 @@ jobs:
       foo: bar
       booleanVar: true
     steps:
-      -name: Display env var
+      - name: Display env var
         id: displayEnvVar
         run: |
           echo "Foo is '${{ env.foo }}'"
@@ -136,3 +136,12 @@ jobs:
         id: printIfTrue
         if: ${{ env.booleanVar == 'true' }}
         run: echo "Printing since it's true"
+
+  Does-Exit-1-in-Bash-Really-Stops-Other-Steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Force exit 1
+        run: exit 1
+
+      - name: This should not run
+        run: echo "This shouldn't run"
