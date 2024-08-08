@@ -134,5 +134,5 @@ jobs:
 
       - name: PrintIfTrue
         id: printIfTrue
-        if: ${{ env.booleanVar == true }}
+        if: ${{ env.booleanVar == 'true' }}
         run: echo "Printing since it's true"
