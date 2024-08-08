@@ -117,6 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       foo: bar
+      booleanVar: true
     steps:
       - name: Display env var
         id: displayEnvVar
@@ -130,3 +131,8 @@ jobs:
         id: displayEnvVarAgain
         run: |
           echo "Foo should now be baz; is actually '${{ env.foo }}'"
+
+      - name: PrintIfTrue
+        id: printIfTrue
+        if: ${{ env.booleanVar }}
+        run: echo "Printing since it's true"
