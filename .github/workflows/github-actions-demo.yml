@@ -145,3 +145,10 @@ jobs:
 
       - name: This should not run
         run: echo "This shouldn't run [edit- and it doesn't]"
+
+  Job-Shoulnt-Run-if-Previous-Exited-in-Error:
+    needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
+    runs-on: ubuntu-latest
+    steps:
+      - name: No, don't run
+        run: echo "No, it isn't running"
