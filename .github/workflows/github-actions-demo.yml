@@ -119,7 +119,7 @@ jobs:
       foo: bar
       booleanVar: true
     steps:
-      - name: Display env var
+      -name: Display env var
         id: displayEnvVar
         run: |
           echo "Foo is '${{ env.foo }}'"
