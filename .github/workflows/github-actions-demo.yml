@@ -161,9 +161,11 @@ jobs:
 
   Env-Var-Empty-No-Echo:
     env:
-      baz: " "
+      grepResult:
     runs-on: ubuntu-latest
     steps:
+      - name: Set grep result
+        run: echo "grep-result=$(echo ls | grep foo)" >> $GITHUB_ENV
       - name: test
-        if: ${{ env.baz }}
-        run: echo "Echoing even though baz is whitespace"
+        if: ${{ env.grepResult }}
+        run: echo "Echoing even though grep result '${{ env.grepResult }}' is empty"
