@@ -162,13 +162,17 @@ jobs:
   Env-Var-Empty-No-Echo:
     env:
       grepResult:
+
     runs-on: ubuntu-latest
+
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+
       - name: Set grep result
         run: |
-            echo $(ls ${{ github.workspace }})
-      #     echo "grepResult=$(ls . | grep hello)" >> $GITHUB_ENV
+          echo "grepResult=$(ls | grep hello)" >> $GITHUB_ENV
 
-      # - name: test
-      #   if: ${{ env.grepResult }}
-      #   run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
+      - name: test
+        if: ${{ env.grepResult }}
+        run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
