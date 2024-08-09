@@ -165,7 +165,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set grep result
-        run: echo "grepResult=$(ls | grep hello)" >> $GITHUB_ENV
+        run: echo "grepResult=$(ls ${{ github.workspace }} | grep hello)" >> $GITHUB_ENV
       - name: test
         if: ${{ env.grepResult }}
         run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
