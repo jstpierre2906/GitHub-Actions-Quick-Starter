@@ -83,19 +83,19 @@ jobs:
       - name: Display vars
         run: env
 
-  Install-NodeJS:
-    name: Install NodeJS
-    needs: Explore-GitHub-Actions
-    runs-on: ubuntu-latest
-    steps:
-      - name: Installation process
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.14.2
+  # Install-NodeJS:
+  #   name: Install NodeJS
+  #   needs: Explore-GitHub-Actions
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Installation process
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18.14.2
 
   Run-JS-Script:
     name: Run JS Script
-    needs: [Install-NodeJS]
+    # needs: [Install-NodeJS]
     runs-on: ubuntu-latest
     # Using matrix strategy to send different values to JS file
     # (This results in both them steps below being run 2 times)
