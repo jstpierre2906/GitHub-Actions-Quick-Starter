@@ -171,8 +171,7 @@ jobs:
 
       - name: Set grep result
         run: |
-          echo "grepResult=1" >> $GITHUB_ENV
-          # echo "grepResult=$(ls | grep hello)" >> $GITHUB_ENV
+          echo "grepResult=$(ls . | grep -P JS)" >> $GITHUB_ENV
 
       - name: test
         if: ${{ env.grepResult }}
