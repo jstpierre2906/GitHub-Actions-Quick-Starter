@@ -171,7 +171,7 @@ jobs:
 
       - name: Set grep result
         run: |
-          echo "grepResult=$(ls | grep -P JS)" >> $GITHUB_ENV
+          echo "grepResult=$(npm run | grep test-coverage)" >> $GITHUB_ENV
 
       - name: test
         if: ${{ env.grepResult }}
