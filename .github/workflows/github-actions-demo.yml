@@ -166,7 +166,7 @@ jobs:
     steps:
       - name: Set grep result
         run: |
-          ls ${{ github.workspace }}
+            echo $(ls ${{ github.workspace }})
       #     echo "grepResult=$(ls . | grep hello)" >> $GITHUB_ENV
 
       # - name: test
