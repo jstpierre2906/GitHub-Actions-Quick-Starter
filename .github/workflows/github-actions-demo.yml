@@ -10,154 +10,154 @@ on:
       - main
 
 jobs:
-  Explore-GitHub-Actions:
-    # Conditional using Expressions
-    if: ${{ startsWith(github.actor, 'jstpierre') }}
-    name: Explore GitHub Actions
-    runs-on: ubuntu-latest
-    steps:
-      - name: Printing GitHub vars
-        run: |
-          echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-          echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-          echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+  # Explore-GitHub-Actions:
+  #   # Conditional using Expressions
+  #   if: ${{ startsWith(github.actor, 'jstpierre') }}
+  #   name: Explore GitHub Actions
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Printing GitHub vars
+  #       run: |
+  #         echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+  #         echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+  #         echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
 
-      - name: Check out repository code
-        uses: actions/checkout@v4
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
 
-      - name: Printing repo ready
-        run: |
-          echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-          echo "🖥️ The workflow is now ready to test your code on the runner."
+  #     - name: Printing repo ready
+  #       run: |
+  #         echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+  #         echo "🖥️ The workflow is now ready to test your code on the runner."
 
-      - name: List files in the repository
-        # Setting step ID for use in getting var value further on
-        id: listFiles
-        # github.workspace is the repo content starting at root level, i.e. not the .github/workflows content
-        # a) Setting a variable holding the sh file's name
-        # b) Echoing it
-        # c) Sending it to step output (by way of the last echo being added to $GITHUB_OUTPUT, I think).
-        run: |
-          LOCAL_FILES=$(ls ${{ github.workspace }})
-          echo $LOCAL_FILES
-          echo "LIST_FILES=\"$(echo ${LOCAL_FILES} | sed 's/ /, /g')\"" >> $GITHUB_OUTPUT
+  #     - name: List files in the repository
+  #       # Setting step ID for use in getting var value further on
+  #       id: listFiles
+  #       # github.workspace is the repo content starting at root level, i.e. not the .github/workflows content
+  #       # a) Setting a variable holding the sh file's name
+  #       # b) Echoing it
+  #       # c) Sending it to step output (by way of the last echo being added to $GITHUB_OUTPUT, I think).
+  #       run: |
+  #         LOCAL_FILES=$(ls ${{ github.workspace }})
+  #         echo $LOCAL_FILES
+  #         echo "LIST_FILES=\"$(echo ${LOCAL_FILES} | sed 's/ /, /g')\"" >> $GITHUB_OUTPUT
 
-      - name: Printing job status
-        run: echo "🍏 This job's status is ${{ job.status }}."
+  #     - name: Printing job status
+  #       run: echo "🍏 This job's status is ${{ job.status }}."
 
-      # Running a script file
-      # Creating variables and passing them to the script via the env keyword
-      # (Getting previous step output by way if its ID)
-      - name: Running hello.sh Bash file
-        # File path is relative to repo root
-        run: ./hello.sh
-        # Using GitHub Actions Expressions
-        # https://docs.github.com/en/actions/learn-github-actions/expressions
-        env:
-          SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
-          GREETING_NAME: "World"
-          LIST_FILES: ${{ steps.listFiles.outputs.LIST_FILES }}
+  #     # Running a script file
+  #     # Creating variables and passing them to the script via the env keyword
+  #     # (Getting previous step output by way if its ID)
+  #     - name: Running hello.sh Bash file
+  #       # File path is relative to repo root
+  #       run: ./hello.sh
+  #       # Using GitHub Actions Expressions
+  #       # https://docs.github.com/en/actions/learn-github-actions/expressions
+  #       env:
+  #         SUBJECT: ${{ format('GitHub {0} Quick Starter', 'Actions') }}
+  #         GREETING_NAME: "World"
+  #         LIST_FILES: ${{ steps.listFiles.outputs.LIST_FILES }}
 
-  Accessing-Vars-and-Secrets-Set-In-GitHub:
-    name: Accessing variables and secrets defined in GitHub
-    runs-on: ubuntu-latest
-    # Using 'dev' environment defined in GitHub (/settings/environments)
-    # must be specified in order to access environment variables set through the GitHub interface
-    environment: dev
-    steps:
-      - name: Accessing vars
-        # No issue accessing repo var without environment being defined, though.
-        run: |
-          echo "Environment-level var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
-          echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
+  # Accessing-Vars-and-Secrets-Set-In-GitHub:
+  #   name: Accessing variables and secrets defined in GitHub
+  #   runs-on: ubuntu-latest
+  #   # Using 'dev' environment defined in GitHub (/settings/environments)
+  #   # must be specified in order to access environment variables set through the GitHub interface
+  #   environment: dev
+  #   steps:
+  #     - name: Accessing vars
+  #       # No issue accessing repo var without environment being defined, though.
+  #       run: |
+  #         echo "Environment-level var from GiHub- ${{ vars.ENVIRONMENT_DEV_TEST_VAR }}"
+  #         echo "Repository-level var from GiHub- ${{ vars.REPOSITORY_TEST_VAR }}"
 
-      - name: Accessing secrets
-        # Secret is being outputted as '***', which is neat.
-        run: |
-          echo "Repository-level secret from GiHub- ${{ secrets.REPOSITORY_SECRET }}"
+  #     - name: Accessing secrets
+  #       # Secret is being outputted as '***', which is neat.
+  #       run: |
+  #         echo "Repository-level secret from GiHub- ${{ secrets.REPOSITORY_SECRET }}"
 
-  Display-Env-Variables:
-    name: Display environment variables
-    runs-on: ubuntu-latest
-    steps:
-      - name: Display vars
-        run: env
+  # Display-Env-Variables:
+  #   name: Display environment variables
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Display vars
+  #       run: env
 
-  Install-NodeJS:
-    name: Install NodeJS
-    needs: Explore-GitHub-Actions
-    runs-on: ubuntu-latest
-    steps:
-      - name: Installation process
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18.14.2
+  # Install-NodeJS:
+  #   name: Install NodeJS
+  #   needs: Explore-GitHub-Actions
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Installation process
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: 18.14.2
 
-  Run-JS-Script:
-    name: Run JS Script
-    needs: [Install-NodeJS]
-    runs-on: ubuntu-latest
-    # Using matrix strategy to send different values to JS file
-    # (This results in both them steps below being run 2 times)
-    strategy:
-      matrix:
-        GREETING: ["Hello", "Welcome"]
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
+  # Run-JS-Script:
+  #   name: Run JS Script
+  #   needs: [Install-NodeJS]
+  #   runs-on: ubuntu-latest
+  #   # Using matrix strategy to send different values to JS file
+  #   # (This results in both them steps below being run 2 times)
+  #   strategy:
+  #     matrix:
+  #       GREETING: ["Hello", "Welcome"]
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
 
-      # File path is relative to repo root
-      - name: Display console.log
-        run: node ./helloJS.js
-        # var is passed as a JS process.env var, i.e. process.env.GREETING_JS
-        env:
-          GREETING_JS: ${{ matrix.GREETING }}
+  #     # File path is relative to repo root
+  #     - name: Display console.log
+  #       run: node ./helloJS.js
+  #       # var is passed as a JS process.env var, i.e. process.env.GREETING_JS
+  #       env:
+  #         GREETING_JS: ${{ matrix.GREETING }}
 
-  Share-and-Update-Var-Between-Steps:
-    runs-on: ubuntu-latest
-    env:
-      foo: bar
-      # testing with undefined var
-      baz:
-      booleanVar: true
-    steps:
-      - name: Display env var
-        id: displayEnvVar
-        run: |
-          echo "Foo is '${{ env.foo }}'"
-          echo "Attempting to modify var"
-          echo "foo=baz" >> $GITHUB_ENV
-          echo "Foo is still '${{ env.foo }}'"
+  # Share-and-Update-Var-Between-Steps:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     foo: bar
+  #     # testing with undefined var
+  #     baz:
+  #     booleanVar: true
+  #   steps:
+  #     - name: Display env var
+  #       id: displayEnvVar
+  #       run: |
+  #         echo "Foo is '${{ env.foo }}'"
+  #         echo "Attempting to modify var"
+  #         echo "foo=baz" >> $GITHUB_ENV
+  #         echo "Foo is still '${{ env.foo }}'"
 
-          echo "baz=bat" >> $GITHUB_ENV
+  #         echo "baz=bat" >> $GITHUB_ENV
 
-      - name: Display env var again
-        id: displayEnvVarAgain
-        run: |
-          echo "Foo should now be baz; is actually '${{ env.foo }}'"
-          echo "Baz should now be bat; is actually '${{ env.baz }}'"
+  #     - name: Display env var again
+  #       id: displayEnvVarAgain
+  #       run: |
+  #         echo "Foo should now be baz; is actually '${{ env.foo }}'"
+  #         echo "Baz should now be bat; is actually '${{ env.baz }}'"
 
-      - name: PrintIfTrue
-        id: printIfTrue
-        if: ${{ env.booleanVar == 'true' }}
-        run: echo "Printing since it's true"
+  #     - name: PrintIfTrue
+  #       id: printIfTrue
+  #       if: ${{ env.booleanVar == 'true' }}
+  #       run: echo "Printing since it's true"
 
-  Does-Exit-1-in-Bash-Really-Stops-Other-Steps:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Force exit 1
-        run: |
-          exit 1
+  # Does-Exit-1-in-Bash-Really-Stops-Other-Steps:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Force exit 1
+  #       run: |
+  #         exit 1
 
-      - name: This should not run
-        run: echo "This shouldn't run [edit- and it doesn't]"
+  #     - name: This should not run
+  #       run: echo "This shouldn't run [edit- and it doesn't]"
 
-  Job-Shoulnt-Run-if-Previous-Exited-in-Error:
-    needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
-    runs-on: ubuntu-latest
-    steps:
-      - name: No, don't run
-        run: echo "No, it isn't running"
+  # Job-Shoulnt-Run-if-Previous-Exited-in-Error:
+  #   needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: No, don't run
+  #       run: echo "No, it isn't running"
 
   Env-Var-Empty-No-Echo:
     env:
@@ -166,7 +166,7 @@ jobs:
     steps:
       - name: Set grep result
         run: |
-          ls ${{ github.workspace }} | grep hello
+          ls ${{ github.workspace }}
       #     echo "grepResult=$(ls . | grep hello)" >> $GITHUB_ENV
 
       # - name: test
