@@ -171,8 +171,8 @@ jobs:
 
       - name: Set grep result
         run: |
-          echo "grepResult=$(ls . | grep -P JS)" >> $GITHUB_ENV
+          echo "grepResult=$(ls . | grep -P JSX)" >> $GITHUB_ENV
 
       - name: test
         if: ${{ env.grepResult }}
-        run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
+        run: echo "Not echoing since grep result '${{ env.grepResult }}' is empty"
