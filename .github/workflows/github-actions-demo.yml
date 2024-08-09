@@ -166,7 +166,7 @@ jobs:
     steps:
       - name: Set grep result
         run: |
-          ls | grep hello
+          ls . | grep hello
           echo "grepResult=$(ls . | grep hello)" >> $GITHUB_ENV
 
       - name: test
