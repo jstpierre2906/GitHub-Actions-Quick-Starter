@@ -83,19 +83,19 @@ jobs:
       - name: Display vars
         run: env
 
-  # Install-NodeJS:
-  #   name: Install NodeJS
-  #   needs: Explore-GitHub-Actions
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Installation process
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 18.14.2
+  Install-NodeJS:
+    name: Install NodeJS
+    needs: Explore-GitHub-Actions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Installation process
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.14.2
 
   Run-JS-Script:
     name: Run JS Script
-    # needs: [Install-NodeJS]
+    needs: [Install-NodeJS]
     runs-on: ubuntu-latest
     # Using matrix strategy to send different values to JS file
     # (This results in both them steps below being run 2 times)
@@ -142,15 +142,14 @@ jobs:
     steps:
       - name: Force exit 1
         run: |
-          echo "Testing if end of line Bash comment is allowed through GHA" # A comment
-          # exit 1
+          exit 1
 
-      # - name: This should not run
-      #   run: echo "This shouldn't run [edit- and it doesn't]"
+      - name: This should not run
+        run: echo "This shouldn't run [edit- and it doesn't]"
 
-  # Job-Shoulnt-Run-if-Previous-Exited-in-Error:
-  #   needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: No, don't run
-  #       run: echo "No, it isn't running"
+  Job-Shoulnt-Run-if-Previous-Exited-in-Error:
+    needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
+    runs-on: ubuntu-latest
+    steps:
+      - name: No, don't run
+        run: echo "No, it isn't running"
