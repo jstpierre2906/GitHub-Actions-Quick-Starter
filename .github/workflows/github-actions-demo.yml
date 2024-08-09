@@ -161,10 +161,9 @@ jobs:
 
   Env-Var-Empty-No-Echo:
     env:
-      baz:
-
+      baz: " "
     runs-on: ubuntu-latest
     steps:
       - name: test
         if: ${{ env.baz }}
-        run: echo "Echoing even though baz is undefined"
+        run: echo "Echoing even though baz is whitespace"
