@@ -158,3 +158,12 @@ jobs:
     steps:
       - name: No, don't run
         run: echo "No, it isn't running"
+
+  Env-Var-Empty-No-Echo:
+    env:
+      baz:
+    runs-on: ubuntu-latest
+    steps:
+      - name: test
+        if: ${{ env.baz }}
+        run: echo "Echoing even though baz is undefined"
