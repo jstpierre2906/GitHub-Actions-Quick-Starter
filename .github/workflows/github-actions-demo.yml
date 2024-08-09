@@ -117,6 +117,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       foo: bar
+      # testing with undefined var
+      baz:
       booleanVar: true
     steps:
       - name: Display env var
@@ -127,10 +129,13 @@ jobs:
           echo "foo=baz" >> $GITHUB_ENV
           echo "Foo is still '${{ env.foo }}'"
 
+          echo "baz=bat" >> $GITHUB_ENV
+
       - name: Display env var again
         id: displayEnvVarAgain
         run: |
           echo "Foo should now be baz; is actually '${{ env.foo }}'"
+          echo "Baz should now be bat; is actually '${{ env.baz }}'"
 
       - name: PrintIfTrue
         id: printIfTrue
