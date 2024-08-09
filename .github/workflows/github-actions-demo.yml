@@ -141,14 +141,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Force exit 1
-        run: exit 1
+        run: |
+          echo "Testing if end of line Bash comment is allowed through GHA" # A comment
+          # exit 1
 
-      - name: This should not run
-        run: echo "This shouldn't run [edit- and it doesn't]"
+      # - name: This should not run
+      #   run: echo "This shouldn't run [edit- and it doesn't]"
 
-  Job-Shoulnt-Run-if-Previous-Exited-in-Error:
-    needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
-    runs-on: ubuntu-latest
-    steps:
-      - name: No, don't run
-        run: echo "No, it isn't running"
+  # Job-Shoulnt-Run-if-Previous-Exited-in-Error:
+  #   needs: [Does-Exit-1-in-Bash-Really-Stops-Other-Steps]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: No, don't run
+  #       run: echo "No, it isn't running"
