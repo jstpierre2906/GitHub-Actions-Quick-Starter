@@ -162,6 +162,7 @@ jobs:
   Env-Var-Empty-No-Echo:
     env:
       baz:
+
     runs-on: ubuntu-latest
     steps:
       - name: test
