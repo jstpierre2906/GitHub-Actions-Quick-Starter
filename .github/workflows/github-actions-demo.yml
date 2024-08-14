@@ -176,3 +176,12 @@ jobs:
       - name: test
         if: ${{ env.grepResult }}
         run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
+
+  ContainsLowercase:
+    env:
+      testString: Hello World
+    runs-on: ubuntu-latest
+    steps:
+      - name: test case
+        if: ${{ contains(env.testString, 'hello') }}
+        run: echo "lowercase works"
