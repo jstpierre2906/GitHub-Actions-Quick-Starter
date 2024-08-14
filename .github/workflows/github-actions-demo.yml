@@ -180,8 +180,9 @@ jobs:
   ContainsLowercase:
     env:
       testString: Hello World
+      otherString: Foo
     runs-on: ubuntu-latest
     steps:
       - name: test case
-        if: contains(env.testString, 'hello')
+        if: contains(env.testString, 'hello') && env.otherString == 'Foo'
         run: echo "lowercase works"
