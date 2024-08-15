@@ -184,5 +184,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: test case
-        if: contains(env.testString, 'hello') && env.otherString == 'Foo'
-        run: echo "lowercase works"
+        if: contains(env.testString, 'hello') && !env.otherString == 'Bar'
+        run: echo "lowercase and negative without parentheses work"
