@@ -192,9 +192,11 @@ jobs:
       workspace: ${{ github.workspace }}
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
       - name: Display workspace as env var set above
         run: |
           echo "${{ env.workspace }}"
-          # echo "$(ls -l ${{ env.workspace }}/*.js)" Doesn't work
+          echo "$(ls -l ${{ env.workspace }}/*.js)"
           # echo "$(ls -l ./*.js)"
-          echo "$(ls)"
+          # echo "$(ls)"
