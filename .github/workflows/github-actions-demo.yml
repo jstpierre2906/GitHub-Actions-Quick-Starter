@@ -193,4 +193,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display workspace as env var set above
-        run: echo "${{ env.workspace }}"
+        run: |
+          echo "${{ env.workspace }}"
+          echo "$(ls -l ${{ env.workspace }}/*.js)"
