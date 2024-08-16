@@ -113,34 +113,34 @@ jobs:
   #       env:
   #         GREETING_JS: ${{ matrix.GREETING }}
 
-  Share-and-Update-Var-Between-Steps:
-    runs-on: ubuntu-latest
-    env:
-      foo: bar
-      # testing with undefined var
-      baz:
-      booleanVar: true
-    steps:
-      - name: Display env var
-        id: displayEnvVar
-        run: |
-          echo "Foo is '${{ env.foo }}'"
-          echo "Attempting to modify var"
-          echo "foo=baz" >> $GITHUB_ENV
-          echo "Foo is still '${{ env.foo }}'"
+  # Share-and-Update-Var-Between-Steps:
+  #   runs-on: ubuntu-latest
+  #   env:
+  #     foo: bar
+  #     # testing with undefined var
+  #     baz:
+  #     booleanVar: true
+  #   steps:
+  #     - name: Display env var
+  #       id: displayEnvVar
+  #       run: |
+  #         echo "Foo is '${{ env.foo }}'"
+  #         echo "Attempting to modify var"
+  #         echo "foo=baz" >> $GITHUB_ENV
+  #         echo "Foo is still '${{ env.foo }}'"
 
-          echo "baz=bat" >> $GITHUB_ENV
+  #         echo "baz=bat" >> $GITHUB_ENV
 
-      - name: Display env var again
-        id: displayEnvVarAgain
-        run: |
-          echo "Foo should now be baz; is actually '${{ env.foo }}'"
-          echo "Baz should now be bat; is actually '${{ env.baz }}'"
+  #     - name: Display env var again
+  #       id: displayEnvVarAgain
+  #       run: |
+  #         echo "Foo should now be baz; is actually '${{ env.foo }}'"
+  #         echo "Baz should now be bat; is actually '${{ env.baz }}'"
 
-      - name: PrintIfTrue
-        id: printIfTrue
-        if: env.booleanVar == 'true'
-        run: echo "Printing since it's true"
+  #     - name: PrintIfTrue
+  #       id: printIfTrue
+  #       if: env.booleanVar == 'true'
+  #       run: echo "Printing since it's true"
 
   # Does-Exit-1-in-Bash-Really-Stops-Other-Steps:
   #   runs-on: ubuntu-latest
@@ -159,30 +159,38 @@ jobs:
   #     - name: No, don't run
   #       run: echo "No, it isn't running"
 
-  Env-Var-Empty-No-Echo:
+  # Env-Var-Empty-No-Echo:
+  #   env:
+  #     grepResult:
+
+  #   runs-on: ubuntu-latest
+
+  #   steps:
+  #     - name: Check out repository code
+  #       uses: actions/checkout@v4
+
+  #     - name: Set grep result
+  #       run: |
+  #         echo "grepResult=$(npm run | grep test | sed $'N;s/[\\n\r]//g')" >> $GITHUB_ENV
+
+  #     - name: test
+  #       if: env.grepResult
+  #       run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
+
+  # ContainsLowercase:
+  #   env:
+  #     testString: Hello World
+  #     otherString: Foo
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: test case
+  #       if: contains(env.testString, 'hello') && (!env.otherString == 'Bar')
+  #       run: echo "lowercase and negative with parentheses work"
+
+  TestSetWorkspaceEnvVarDirectly:
     env:
-      grepResult:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-
-      - name: Set grep result
-        run: |
-          echo "grepResult=$(npm run | grep test | sed $'N;s/[\\n\r]//g')" >> $GITHUB_ENV
-
-      - name: test
-        if: env.grepResult
-        run: echo "Echoing since grep result '${{ env.grepResult }}' isn't empty"
-
-  ContainsLowercase:
-    env:
-      testString: Hello World
-      otherString: Foo
+      workspace: ${{ github.workspace }}
     runs-on: ubuntu-latest
     steps:
-      - name: test case
-        if: contains(env.testString, 'hello') && (!env.otherString == 'Bar')
-        run: echo "lowercase and negative with parentheses work"
+      - name: Display workspace as env var set above
+        run: echo "${{ env.workspace }}"
