@@ -197,4 +197,4 @@ jobs:
           echo "${{ env.workspace }}"
           # echo "$(ls -l ${{ env.workspace }}/*.js)" Doesn't work
           # echo "$(ls -l ./*.js)"
-          echo "$(ls -l)"
+          echo "$(ls)"
