@@ -195,4 +195,5 @@ jobs:
       - name: Display workspace as env var set above
         run: |
           echo "${{ env.workspace }}"
-          echo "$(ls -l ${{ env.workspace }}/*.js)"
+          # echo "$(ls -l ${{ env.workspace }}/*.js)" Doesn't work
+          echo "$(ls -l ./*.js)"
