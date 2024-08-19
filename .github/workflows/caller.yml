@@ -16,5 +16,6 @@ jobs:
     steps:
       - name: Print formatted JSON
         id: printFormattedJSON
+        # Callee output retrival and usage via `needs.<JOB>` syntax
         run: |
           echo "JSON Value formatted by called workflow: ${{ needs.SetFormattedJSON.outputs.formattedJSON }}"
