@@ -7,22 +7,23 @@ on:
         type: string
         description: foo value
       baz:
-        required: true
+        required: false
         type: string
         description: baz value
+        default: bat
 
-env:
-  formattedValues:
+    outputs:
+      formattedJSON:
+        description: The formatted JSON value
+        value: ${{ jobs.FormatJSON.outputs.formattedJSON }}
 
 jobs:
-  SayHello:
+  FormatJSON:
     runs-on: ubuntu-latest
+    outputs:
+      formattedJSON: ${{steps.setFormattedJSON.outputs.out}}
     steps:
-      - name: Set formatted values
-        id: setFormattedValues
+      - name: Set formatted JSON for output
+        id: setFormattedJSON
         run: |
-          echo "formattedValues={ 'foo': '${{ inputs.foo }}', 'baz': '${{ inputs.baz }}' }" >> $GITHUB_ENV
-      - name: Do say hello
-        id: doSayHello
-        run: |
-          echo "${{ env.formattedValues }}"
+          echo "out={ \"foo\": \"${{ inputs.foo }}\"", \"baz\": \"${{ inputs.baz }}\" }" >> $GITHUB_OUTPUT
