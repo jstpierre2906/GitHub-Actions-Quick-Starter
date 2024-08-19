@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Call other workflow
         id: callOtherWorkflow
-        uses: ./.github/workflows/callee.yml@main
+        uses: ./.github/workflows/callee.yml
         # uses: jstpierre2906/GitHub-Actions-Quick-Starter/.github/workflows/callee.yml@main
         with:
           foo: bar
