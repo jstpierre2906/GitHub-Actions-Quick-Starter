@@ -6,8 +6,7 @@ on:
 
 jobs:
   CallOtherWorkflow:
-    # uses: ./.github/workflows/callee.yml@main
-    uses: ./.github/workflows/callee.yml@main
+    uses: ./.github/workflows/callee.yml
     with:
       foo: bar
       # baz: bat
