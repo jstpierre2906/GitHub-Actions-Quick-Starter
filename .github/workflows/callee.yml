@@ -1,4 +1,4 @@
-name: Callee workflow
+name: JSON Formatter
 on:
   workflow_call:
     inputs:
@@ -13,17 +13,21 @@ on:
         default: bat
 
     outputs:
+      # Output key for caller retrieval
       formattedJSON:
         description: The formatted JSON value
+        # Setting workflow output value from job output
         value: ${{ jobs.FormatJSON.outputs.formattedJSON }}
 
 jobs:
   FormatJSON:
     runs-on: ubuntu-latest
     outputs:
+      # Setting job output from step output
       formattedJSON: ${{steps.setFormattedJSON.outputs.out}}
     steps:
       - name: Set formatted JSON for output
         id: setFormattedJSON
+        # Setting step output
         run: |
-          echo "out={ \"foo\": \"${{ inputs.foo }}\", \"baz\": \"${{ inputs.baz }}\" }" >> $GITHUB_OUTPUT
+          echo "out={ 'foo': '${{ inputs.foo }}', 'baz': '${{ inputs.baz }}' }" >> $GITHUB_OUTPUT

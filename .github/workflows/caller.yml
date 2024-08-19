@@ -5,16 +5,16 @@ on:
       - main
 
 jobs:
-  CallOtherWorkflow:
+  SetFormattedJSON:
     uses: ./.github/workflows/callee.yml
     with:
       foo: bar
 
-  PrintFormattedValue:
+  PrintFormattedJSON:
     runs-on: ubuntu-latest
-    needs: [CallOtherWorkflow]
+    needs: [SetFormattedJSON]
     steps:
-      - name: Print formatted
-        id: printFormatted
+      - name: Print formatted JSON
+        id: printFormattedJSON
         run: |
-          echo "Value formatted by called workflow: ${{ needs.CallOtherWorkflow.outputs.formattedJSON }}"
+          echo "JSON Value formatted by called workflow: ${{ needs.SetFormattedJSON.outputs.formattedJSON }}"
