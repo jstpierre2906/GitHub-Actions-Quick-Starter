@@ -26,4 +26,4 @@ jobs:
       - name: Set formatted JSON for output
         id: setFormattedJSON
         run: |
-          echo "out={ \"foo\": \"${{ inputs.foo }}\"", \"baz\": \"${{ inputs.baz }}\" }" >> $GITHUB_OUTPUT
+          echo "out={ \"foo\": \"${{ inputs.foo }}\", \"baz\": \"${{ inputs.baz }}\" }" >> $GITHUB_OUTPUT
