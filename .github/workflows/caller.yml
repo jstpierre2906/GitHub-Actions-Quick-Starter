@@ -1,0 +1,17 @@
+name: Caller workflow
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  CallOtherWorkflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call other workflow
+        id: callOtherWorkflow
+        uses: ./.github/workflows/callee.yml@main
+        # uses: jstpierre2906/GitHub-Actions-Quick-Starter/.github/workflows/callee.yml@main
+        with:
+          foo: bar
+        #   baz: bat

@@ -1,0 +1,29 @@
+name: Callee workflow
+on:
+  workflow_call:
+    inputs:
+      foo:
+        required: true
+        type: string
+        description: foo value
+      baz:
+        required: false
+        type: string
+        description: baz value
+        default: bat
+
+env:
+  formattedValues:
+
+jobs:
+  SayHello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set formatted values
+        id: setFormattedValues
+        run: |
+          echo "formattedValues={ 'foo': '${{ inputs.foo }}', 'baz': '${{ inputs.baz }}' }" >> $GITHUB_ENV
+      - name: Do say hello
+        id: doSayHello
+        run: |
+          echo "${{ env.formattedValues }}"
