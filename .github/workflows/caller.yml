@@ -9,4 +9,4 @@ jobs:
     uses: ./.github/workflows/callee.yml
     with:
       foo: bar
-      # baz: bat
+      baz: bav
