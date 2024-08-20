@@ -30,4 +30,4 @@ jobs:
         id: setFormattedJSON
         # Setting step output
         run: |
-          echo "out={ 'foo': '${{ inputs.foo }}', 'baz': '${{ inputs.baz }}' }" >> $GITHUB_OUTPUT
+          echo "outzz={ 'foo': '${{ inputs.foo }}', 'baz': '${{ inputs.baz }}' }" >> $GITHUB_OUTPUT
